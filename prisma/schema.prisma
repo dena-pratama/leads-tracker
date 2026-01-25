@@ -1,0 +1,127 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  ADVERTISER
+  SDR
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  LOST
+  WON
+  FOLLOW_UP
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  role      Role     @default(SDR)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  leads     Lead[]   @relation("AssignedLeads")
+  workspace Workspace[] // For future multi-tenancy
+}
+
+model Workspace {
+  id        String   @id @default(uuid())
+  name      String
+  ownerId   String
+  owner     User     @relation(fields: [ownerId], references: [id])
+  createdAt DateTime @default(now())
+  
+  platformAccounts PlatformAccount[]
+  campaigns        Campaign[]
+  leads            Lead[]
+}
+
+model PlatformAccount {
+  id          String   @id @default(uuid())
+  platform    String   // "META", "GOOGLE", "TIKTOK"
+  accountId   String   // ID from the platform (e.g. ad_account_id)
+  accessToken String   // Encrypted token
+  tokenExpiry DateTime?
+  workspaceId String?
+  workspace   Workspace? @relation(fields: [workspaceId], references: [id])
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Campaign {
+  id          String   @id @default(uuid())
+  platformId  String   // ID from platform
+  name        String
+  status      String
+  workspaceId String?
+  workspace   Workspace? @relation(fields: [workspaceId], references: [id])
+
+  metrics     AdMetricDaily[]
+  leads       Lead[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AdMetricDaily {
+  id          String   @id @default(uuid())
+  date        DateTime
+  campaignId  String
+  campaign    Campaign @relation(fields: [campaignId], references: [id])
+  
+  spend       Float    @default(0)
+  impressions Int      @default(0)
+  clicks      Int      @default(0)
+  leads       Int      @default(0) // Leads count from platform
+  cpl         Float?
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([date, campaignId])
+}
+
+model Lead {
+  id          String   @id @default(uuid())
+  platformId  String?  // ID from platform (lead_id)
+  name        String?
+  email       String?
+  phone       String?
+  status      LeadStatus @default(NEW)
+  
+  campaignId  String?
+  campaign    Campaign? @relation(fields: [campaignId], references: [id])
+  
+  workspaceId String?
+  workspace   Workspace? @relation(fields: [workspaceId], references: [id])
+  
+  assignedToId String?
+  assignedTo   User?    @relation("AssignedLeads", fields: [assignedToId], references: [id])
+
+  statusHistory LeadStatusHistory[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model LeadStatusHistory {
+  id        String   @id @default(uuid())
+  leadId    String
+  lead      Lead     @relation(fields: [leadId], references: [id])
+  status    LeadStatus
+  changedBy String?  // User ID who changed it
+  changedAt DateTime @default(now())
+}

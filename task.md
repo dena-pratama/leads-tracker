@@ -82,12 +82,12 @@ Aku bikin formatnya kayak **checklist engineer** biar kamu tinggal centang satu-
 
 **Folder layout minimal:**
 
-* [ ] `/app` (page + layout)
-* [ ] `/app/api` (API routes)
-* [ ] `/components`
-* [ ] `/lib` (db, auth, utils)
-* [ ] `/jobs` (scheduler/sync)
-* [ ] `/types`
+* [x] `/app` (page + layout)
+* [x] `/app/api` (API routes)
+* [x] `/components`
+* [x] `/lib` (db, auth, utils)
+* [x] `/jobs` (scheduler/sync)
+* [x] `/types`
 
 ---
 
@@ -95,37 +95,37 @@ Aku bikin formatnya kayak **checklist engineer** biar kamu tinggal centang satu-
 
 ## 5) Setup database Postgres (Supabase/Neon) (30–60 menit)
 
-* [ ] Buat project database
-* [ ] Ambil connection string
-* [ ] Simpan di `.env` lokal
+* [x] Buat project database
+* [x] Ambil connection string
+* [x] Simpan di `.env` lokal
 
 ---
 
 ## 6) Setup Prisma (1–2 jam)
 
-* [ ] Install Prisma
-* [ ] `prisma init`
-* [ ] Definisikan schema awal:
+* [x] Install Prisma
+* [x] `prisma init`
+* [x] Definisikan schema awal:
 
 **Minimal tabel MVP**
 
-* [ ] `User`
+* [x] `User`
 
-* [ ] `Workspace` *(opsional tapi bagus dari awal)*
+* [x] `Workspace` *(opsional tapi bagus dari awal)*
 
-* [ ] `PlatformAccount` (token Meta)
+* [x] `PlatformAccount` (token Meta)
 
-* [ ] `Campaign`
+* [x] `Campaign`
 
-* [ ] `AdMetricDaily`
+* [x] `AdMetricDaily`
 
-* [ ] `Lead`
+* [x] `Lead`
 
-* [ ] `LeadStatusHistory` *(opsional, tapi bagus untuk tracking)*
+* [x] `LeadStatusHistory` *(opsional, tapi bagus untuk tracking)*
 
-* [ ] `prisma migrate dev`
+* [x] `prisma migrate dev`
 
-* [ ] Buat Prisma client instance di `/lib/db.ts`
+* [x] Buat Prisma client instance di `/lib/db.ts`
 
 ---
 
@@ -133,16 +133,16 @@ Aku bikin formatnya kayak **checklist engineer** biar kamu tinggal centang satu-
 
 Pilih 1:
 
-* [ ] **Clerk (paling gampang)**
+* [x] **Clerk (paling gampang)**
   atau
 * [ ] NextAuth
 
 Checklist:
 
-* [ ] Login page
-* [ ] Protected routes (dashboard wajib login)
-* [ ] Role: `ADMIN`, `SALES`
-* [ ] Middleware auth (block akses API tanpa login)
+* [x] Login page
+* [x] Protected routes (dashboard wajib login)
+* [x] Role: `ADMIN`, `SALES`
+* [x] Middleware auth (block akses API tanpa login)
 
 ---
 
@@ -151,20 +151,20 @@ Checklist:
 ## 8) Buat halaman dasar (3–6 jam)
 
 * [ ] Landing page (optional)
-* [ ] Login page
-* [ ] Dashboard layout
+* [x] Login page
+* [x] Dashboard layout
 
-  * [ ] sidebar navigation
-  * [ ] topbar (date range, platform filter)
-  * [ ] main content area
+  * [x] sidebar navigation
+  * [x] topbar (date range, platform filter)
+  * [x] main content area
 
 **Menu minimal:**
 
-* [ ] Overview
-* [ ] Leads
-* [ ] Campaigns
-* [ ] SLA Monitor
-* [ ] Settings (Connect Ads)
+* [x] Overview
+* [x] Leads
+* [x] Campaigns
+* [x] SLA Monitor
+* [x] Settings (Connect Ads)
 
 ---
 
