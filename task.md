@@ -172,31 +172,31 @@ Checklist:
 
 ## 9) Buat struktur data leads (2–4 jam)
 
-* [ ] Buat page `Leads Table`
+* [x] Buat page `Leads Table`
 
-* [ ] Kolom minimal:
+* [x] Kolom minimal:
 
-  * [ ] Date Created
-  * [ ] Platform
-  * [ ] Campaign
-  * [ ] Nama
-  * [ ] HP/Email
-  * [ ] Status
-  * [ ] Assigned Sales
-  * [ ] SLA Badge (On Track/Warning/Overdue)
+  * [x] Date Created
+  * [x] Platform
+  * [x] Campaign
+  * [x] Nama
+  * [x] HP/Email
+  * [x] Status
+  * [x] Assigned Sales
+  * [x] SLA Badge (On Track/Warning/Overdue)
 
-* [ ] Filter:
+* [x] Filter:
 
-  * [ ] Date range
-  * [ ] Platform
-  * [ ] Campaign
-  * [ ] Status
-  * [ ] Sales owner
+  * [x] Date range
+  * [x] Platform
+  * [x] Campaign
+  * [x] Status
+  * [x] Sales owner
 
-* [ ] Action:
+* [x] Action:
 
-  * [ ] Update status lead
-  * [ ] Assign lead ke sales
+  * [x] Update status lead
+  * [x] Assign lead ke sales
 
 ---
 
