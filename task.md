@@ -36,17 +36,17 @@ Aku bikin formatnya kayak **checklist engineer** biar kamu tinggal centang satu-
 
 ### 2) Siapin tools dev (30–60 menit)
 
-* [ ] Install **Node.js LTS**
-* [ ] Install **Git**
-* [ ] Install **VS Code**
-* [ ] Install **Postman / Insomnia** (test API)
-* [ ] Setup akun:
+* [x] Install **Node.js LTS**
+* [x] Install **Git**
+* [x] Install **VS Code**
+* [x] Install **Postman / Insomnia** (test API)
+* [x] Setup akun:
 
-  * [ ] GitHub
-  * [ ] Vercel
-  * [ ] Supabase / Neon (database)
-  * [ ] Cloudflare (DNS + WAF)
-  * [ ] Sentry (monitoring)
+  * [x] GitHub
+  * [x] Vercel
+  * [x] Supabase / Neon (database)
+  * [x] Cloudflare (DNS + WAF)
+  * [x] Sentry (monitoring)
 
 ---
 
@@ -54,31 +54,31 @@ Aku bikin formatnya kayak **checklist engineer** biar kamu tinggal centang satu-
 
 ## 3) Buat repository & standar kerja (1 jam)
 
-* [ ] Buat repo GitHub: `leads-tracker`
-* [ ] Buat branch:
+* [x] Buat repo GitHub: `leads-tracker`
+* [x] Buat branch:
 
-  * [ ] `main` (production)
-  * [ ] `dev` (development)
-* [ ] Buat file dasar:
+  * [x] `main` (production)
+  * [x] `dev` (development)
+* [x] Buat file dasar:
 
-  * [ ] `README.md`
-  * [ ] `.env.example`
-  * [ ] `.gitignore`
-* [ ] Tentuin konvensi:
+  * [x] `README.md`
+  * [x] `.env.example`
+  * [x] `.gitignore`
+* [x] Tentuin konvensi:
 
-  * [ ] penamaan table & API route
-  * [ ] struktur folder
-  * [ ] coding standard (ESLint + Prettier)
+  * [x] penamaan table & API route
+  * [x] struktur folder
+  * [x] coding standard (ESLint + Prettier)
 
 ---
 
 ## 4) Init Next.js fullstack (1–2 jam)
 
-* [ ] Create Next.js App (TypeScript)
-* [ ] Setup TailwindCSS
-* [ ] Setup shadcn/ui
-* [ ] Setup ESLint + Prettier
-* [ ] Setup path alias `@/`
+* [x] Create Next.js App (TypeScript)
+* [x] Setup TailwindCSS
+* [x] Setup shadcn/ui
+* [x] Setup ESLint + Prettier
+* [x] Setup path alias `@/`
 
 **Folder layout minimal:**
 
