@@ -202,36 +202,36 @@ Checklist:
 
 ## 10) Buat logic SLA (1–2 jam)
 
-* [ ] Definisikan SLA:
+* [x] Definisikan SLA:
 
-  * [ ] Warning > 2 hari
-  * [ ] Overdue > 5 hari
-* [ ] Hitung SLA berdasarkan:
+  * [x] Warning > 2 hari
+  * [x] Overdue > 5 hari
+* [x] Hitung SLA berdasarkan:
 
-  * [ ] created_time vs last_contacted_at
-  * [ ] atau created_time vs now kalau belum dihubungi
-* [ ] Tampilkan badge warna:
+  * [x] created_time vs last_contacted_at
+  * [x] atau created_time vs now kalau belum dihubungi
+* [x] Tampilkan badge warna:
 
-  * [ ] On Track
-  * [ ] Warning
-  * [ ] Overdue
+  * [x] On Track
+  * [x] Warning
+  * [x] Overdue
 
 ---
 
 ## 11) Buat funnel conversion (2–4 jam)
 
-* [ ] Tentuin pipeline status:
+* [x] Tentuin pipeline status:
 
-  * [ ] NEW → CONTACTED → QUALIFIED → WON/LOST
-* [ ] Hitung conversion rate:
+  * [x] NEW → CONTACTED → QUALIFIED → WON/LOST
+* [x] Hitung conversion rate:
 
-  * [ ] NEW → CONTACTED (%)
-  * [ ] CONTACTED → QUALIFIED (%)
-  * [ ] QUALIFIED → WON (%)
-* [ ] Buat visual funnel sederhana:
+  * [x] NEW → CONTACTED (%)
+  * [x] CONTACTED → QUALIFIED (%)
+  * [x] QUALIFIED → WON (%)
+* [x] Buat visual funnel sederhana:
 
-  * [ ] total angka
-  * [ ] % conversion per step
+  * [x] total angka
+  * [x] % conversion per step
 
 ---
 
@@ -239,16 +239,16 @@ Checklist:
 
 ## 12) Setup Meta Developer App (1–2 jam)
 
-* [ ] Buat app di Meta Developers
-* [ ] Tambahkan produk:
+* [/] Buat app di Meta Developers
+* [/] Tambahkan produk:
 
   * [ ] Facebook Login
   * [ ] Marketing API
-* [ ] Request permissions:
+* [/] Request permissions:
 
   * [ ] `ads_read`
   * [ ] `leads_retrieval`
-* [ ] Isi redirect URL ke domain kamu (dev + prod)
+* [/] Isi redirect URL ke domain kamu (dev + prod)
 * [ ] Simpan:
 
   * [ ] META_APP_ID
@@ -258,42 +258,40 @@ Checklist:
 
 ## 13) Buat fitur “Connect Meta Account” (2–6 jam)
 
-* [ ] Page Settings → Connect Platform
-* [ ] Button “Connect Meta”
-* [ ] OAuth flow:
+* [x] Page Settings → Connect Platform
+* [x] Button “Connect Meta”
+* [x] OAuth flow:
 
-  * [ ] user login ke FB
-  * [ ] accept permission
-  * [ ] dapat access_token
-* [ ] Simpan token aman ke DB:
+  * [x] user login ke FB
+  * [x] accept permission
+  * [x] dapat access_token
+* [x] Simpan token aman ke DB:
 
-  * [ ] encrypted token
-  * [ ] expiry time
+  * [x] encrypted token
+  * [x] expiry time
 
 **MVP cukup 1 akun Meta Ads dulu**
 
-* [ ] Meta Ad Account ID tersimpan di DB
+* [x] Meta Ad Account ID tersimpan di DB
 
 ---
 
 # ✅ H) SYNC DATA (Metrics + Leads)
 
 ## 14) Buat API Sync “Manual Sync Now” (3–8 jam)
+## 14) Buat API Sync “Manual Sync Now” (3–8 jam) [/]
 
 * [ ] Endpoint: `/api/sync/meta`
 
-* [ ] Parameter:
-
-  * [ ] date range (default 7 hari terakhir)
-
-* [ ] Pull data:
-
-  * [ ] list campaigns
-  * [ ] daily metrics (spend, clicks, impressions)
-  * [ ] leads data
-
-* [ ] Upsert ke DB:
-
+* [x] Parameter:
+  * [x] date range (default 7 hari terakhir) - UI & API implementation
+* [x] Cron job / Button “Sync Now”
+* [x] Tarik Ad Account list
+* [x] Tarik Campaigns per Ad Account
+* [x] Tarik Metrics (Spend, CPC, CPL) harian
+  * [x] Requirements: Spend, Leads, Messaging, CTR (All/Link), Reach, Impressions
+* [ ] Tarik Leads (Email, Phone, Name) via Leadgen API
+* [x] Simpan ke tabel: `Campaign`, `AdMetricDaily`, `Lead`
   * [ ] campaigns update / insert
   * [ ] ad_metrics_daily update / insert
   * [ ] leads insert (avoid duplicate via lead_id)

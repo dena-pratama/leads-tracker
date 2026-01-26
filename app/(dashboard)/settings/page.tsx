@@ -1,3 +1,5 @@
+"use client";
+
 export default function SettingsPage() {
     return (
         <div className="space-y-6">
@@ -15,7 +17,10 @@ export default function SettingsPage() {
                             <div className="text-sm text-gray-500">Not connected</div>
                         </div>
                     </div>
-                    <button className="px-4 py-2 border rounded-lg hover:bg-gray-50 text-sm font-medium">
+                    <button
+                        onClick={() => window.location.href = "/api/auth/meta/login"}
+                        className="px-4 py-2 border rounded-lg hover:bg-gray-50 text-sm font-medium transition-colors"
+                    >
                         Connect
                     </button>
                 </div>

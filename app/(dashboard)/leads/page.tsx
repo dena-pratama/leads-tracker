@@ -1,74 +1,42 @@
-import { DataTable } from "./data-table"
-import { columns, Lead } from "./columns"
+"use client";
 
-async function getLeads(): Promise<Lead[]> {
-    // Dummy data for MVP demo
-    return [
-        {
-            id: "LEAD-001",
-            created_at: "2024-03-10",
-            platform: "META",
-            campaign: "Promo Ramadhan",
-            name: "Budi Santoso",
-            email: "budi@gmail.com",
-            phone: "081234567890",
-            status: "NEW",
-            sla_status: "ON_TRACK",
-            sales_name: "-"
-        },
-        {
-            id: "LEAD-002",
-            created_at: "2024-03-09",
-            platform: "META",
-            campaign: "Promo Ramadhan",
-            name: "Siti Aminah",
-            email: "siti@yahoo.com",
-            phone: "081987654321",
-            status: "CONTACTED",
-            sla_status: "WARNING",
-            sales_name: "Andi Sales"
-        },
-        {
-            id: "LEAD-003",
-            created_at: "2024-03-05",
-            platform: "GOOGLE",
-            campaign: "Search Jas Hujan",
-            name: "Rudi Hartono",
-            email: "rudi.h@gmail.com",
-            phone: "085678901234",
-            status: "NEW",
-            sla_status: "OVERDUE",
-            sales_name: "-"
-        },
-        {
-            id: "LEAD-004",
-            created_at: "2024-03-11",
-            platform: "TIKTOK",
-            campaign: "Viral Video A",
-            name: "Citra Kirana",
-            email: "citra@gmail.com",
-            phone: "081234567888",
-            status: "WON",
-            sla_status: "ON_TRACK",
-            sales_name: "Budi Sales"
-        },
-        {
-            id: "LEAD-005",
-            created_at: "2024-03-08",
-            platform: "META",
-            campaign: "Promo Ramadhan",
-            name: "Eko Patrio",
-            email: "eko@gmail.com",
-            phone: "081233334444",
-            status: "LOST",
-            sla_status: "ON_TRACK",
-            sales_name: "Andi Sales"
-        },
-    ]
-}
+import { useEffect, useState } from "react";
+import { DataTable } from "./data-table";
+import { columns, Lead } from "./columns";
+import { RefreshCw, AlertCircle } from "lucide-react";
 
-export default async function LeadsPage() {
-    const data = await getLeads()
+export default function LeadsPage() {
+    const [leads, setLeads] = useState<Lead[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [syncing, setSyncing] = useState(false);
+
+    const fetchLeads = async () => {
+        try {
+            const res = await fetch("/api/leads");
+            const data = await res.json();
+            if (Array.isArray(data)) setLeads(data);
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleSync = async () => {
+        setSyncing(true);
+        try {
+            await fetch("/api/meta/sync-leads");
+            await fetchLeads();
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setSyncing(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchLeads();
+    }, []);
 
     return (
         <div className="space-y-6">
@@ -77,12 +45,25 @@ export default async function LeadsPage() {
                     <h2 className="text-2xl font-bold tracking-tight">Leads</h2>
                     <p className="text-sm text-gray-500">Manage and track your leads from all platforms.</p>
                 </div>
-                <button className="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-800">
-                    Sync Leads Now
+                <button
+                    onClick={handleSync}
+                    disabled={syncing}
+                    className="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 disabled:opacity-50"
+                >
+                    {syncing ? <RefreshCw className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
+                    {syncing ? "Syncing..." : "Sync Leads Now"}
                 </button>
             </div>
 
-            <DataTable columns={columns} data={data} />
+            {loading ? (
+                <div className="h-64 flex flex-col items-center justify-center gap-2 text-gray-400">
+                    <RefreshCw className="w-8 h-8 animate-spin" />
+                    <p>Loading leads...</p>
+                </div>
+            ) : (
+                <DataTable columns={columns} data={leads} />
+            )}
         </div>
     );
 }
+
