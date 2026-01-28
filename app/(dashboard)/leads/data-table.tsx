@@ -35,11 +35,15 @@ import {
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
+    rowSelection?: Record<string, boolean>
+    setRowSelection?: React.Dispatch<React.SetStateAction<Record<string, boolean>>>
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data,
+    rowSelection: externalRowSelection,
+    setRowSelection: externalSetRowSelection,
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -47,7 +51,11 @@ export function DataTable<TData, TValue>({
     )
     const [columnVisibility, setColumnVisibility] =
         React.useState<VisibilityState>({})
-    const [rowSelection, setRowSelection] = React.useState({})
+    const [internalRowSelection, setInternalRowSelection] = React.useState({})
+
+    // Use external state if provided, otherwise internal
+    const rowSelection = externalRowSelection ?? internalRowSelection
+    const setRowSelection = externalSetRowSelection ?? setInternalRowSelection
 
     const table = useReactTable({
         data,
@@ -65,6 +73,10 @@ export function DataTable<TData, TValue>({
             columnFilters,
             columnVisibility,
             rowSelection,
+            pagination: {
+                pageIndex: 0,
+                pageSize: 100, // Default to 100
+            },
         },
     })
 
@@ -106,7 +118,8 @@ export function DataTable<TData, TValue>({
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
-            <div className="rounded-md border bg-white">
+            {/* Added responsive wrapper */}
+            <div className="rounded-md border bg-white overflow-auto max-w-[90vw] md:max-w-full">
                 <Table>
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
@@ -156,12 +169,30 @@ export function DataTable<TData, TValue>({
                     </TableBody>
                 </Table>
             </div>
-            <div className="flex items-center justify-end space-x-2 py-4">
-                <div className="flex-1 text-sm text-muted-foreground">
-                    {table.getFilteredSelectedRowModel().rows.length} of{" "}
-                    {table.getFilteredRowModel().rows.length} row(s) selected.
+            <div className="flex items-center justify-between py-4">
+                {/* Page Size Selector */}
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <span>Rows per page</span>
+                    <select
+                        value={table.getState().pagination.pageSize}
+                        onChange={(e) => {
+                            table.setPageSize(Number(e.target.value))
+                        }}
+                        className="h-8 w-[70px] rounded-md border border-input bg-background px-2 py-1"
+                    >
+                        {[10, 20, 30, 40, 50, 100].map((pageSize) => (
+                            <option key={pageSize} value={pageSize}>
+                                {pageSize}
+                            </option>
+                        ))}
+                    </select>
                 </div>
-                <div className="space-x-2">
+
+                <div className="flex items-center space-x-2">
+                    <div className="flex-1 text-sm text-muted-foreground">
+                        {table.getFilteredSelectedRowModel().rows.length} of{" "}
+                        {table.getFilteredRowModel().rows.length} row(s) selected.
+                    </div>
                     <Button
                         variant="outline"
                         size="sm"

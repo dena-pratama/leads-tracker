@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { DataTable } from "./data-table";
 import { columns, Lead } from "./columns";
-import { RefreshCw, AlertCircle } from "lucide-react";
+import { RefreshCw } from "lucide-react";
 
 export default function LeadsPage() {
     const [leads, setLeads] = useState<Lead[]>([]);
@@ -43,12 +43,12 @@ export default function LeadsPage() {
             <div className="flex items-center justify-between">
                 <div>
                     <h2 className="text-2xl font-bold tracking-tight">Leads</h2>
-                    <p className="text-sm text-gray-500">Manage and track your leads from all platforms.</p>
+                    <p className="text-sm text-muted-foreground">Manage and track your leads from all platforms.</p>
                 </div>
                 <button
                     onClick={handleSync}
                     disabled={syncing}
-                    className="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 disabled:opacity-50"
+                    className="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 disabled:opacity-50"
                 >
                     {syncing ? <RefreshCw className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
                     {syncing ? "Syncing..." : "Sync Leads Now"}

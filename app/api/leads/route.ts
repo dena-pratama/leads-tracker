@@ -22,9 +22,37 @@ export async function GET() {
             status: l.status,
             sales_name: "-", // Need assignment logic later
             sla_status: calculateLeadSLA(l.createdAt.toISOString(), l.status as any),
+            product: l.product,
+            notes: l.notes,
+            lead_date: l.leadDate ? l.leadDate.toISOString() : "-",
+            lead_source: l.leadSource || "-", // New field
         }));
 
         return NextResponse.json(formattedLeads);
+    } catch (error: any) {
+        return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+}
+
+export async function POST(request: Request) {
+    try {
+        const body = await request.json();
+        const { name, email, phone, product, notes, leadSource, status } = body;
+
+        const newLead = await db.lead.create({
+            data: {
+                name,
+                email,
+                phone,
+                product,
+                notes,
+                leadSource, // Save source
+                status: status || "NEW",
+                platformId: "MANUAL",
+            },
+        });
+
+        return NextResponse.json(newLead);
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }

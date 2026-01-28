@@ -124,6 +124,7 @@ Aku bikin formatnya kayak **checklist engineer** biar kamu tinggal centang satu-
 * [x] `LeadStatusHistory` *(opsional, tapi bagus untuk tracking)*
 
 * [x] `prisma migrate dev`
+* [x] Add `product` and `notes` to `Lead` schema (Leads Potential)
 
 * [x] Buat Prisma client instance di `/lib/db.ts`
 
@@ -164,7 +165,30 @@ Checklist:
 * [x] Leads
 * [x] Campaigns
 * [x] SLA Monitor
+* [x] Leads Potential
+  * [x] Create (Add Manual Lead)
+  * [x] Read (Table View)
+  * [x] Update (Inline Edit)
+  * [x] Delete (Action Menu)
+  * [x] Import
+    * [x] From File (Excel/CSV)
+    * [x] From Sheet URL
+    * [x] Map "Date" column to Lead Date (separate from Created At)
+  * [x] Import
+    * [x] From File (Excel/CSV)
+    * [x] From Sheet URL
+    * [x] Map "Date" column to Lead Date (separate from Created At)
+  * [x] UI Refinements (Product as Text, Lead Date Column)
+  * [x] Bulk Delete (Select All & Delete)
+  * [x] Lead Source/Database Filtering
+    * [x] Add `leadSource` to Schema
+    * [x] Dropdown for Source Selection
+    * [x] Filter Logic
+  * [x] UI Improvements
+    * [x] Responsive Table (Scrollable)
+    * [x] Pagination Size (Up to 100 items)
 * [x] Settings (Connect Ads)
+* [x] Dark Mode Implementation (Global)
 
 ---
 
@@ -292,9 +316,9 @@ Checklist:
   * [x] Requirements: Spend, Leads, Messaging, CTR (All/Link), Reach, Impressions
 * [ ] Tarik Leads (Email, Phone, Name) via Leadgen API
 * [x] Simpan ke tabel: `Campaign`, `AdMetricDaily`, `Lead`
-  * [ ] campaigns update / insert
-  * [ ] ad_metrics_daily update / insert
-  * [ ] leads insert (avoid duplicate via lead_id)
+  * [ ] campaigns update
+  * [ ] ad_metrics_daily update
+  * [ ] leads / result
 
 ---
 

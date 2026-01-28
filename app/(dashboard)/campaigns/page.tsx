@@ -64,12 +64,12 @@ export default function CampaignsPage() {
             <div className="flex items-center justify-between">
                 <div>
                     <h2 className="text-2xl font-bold tracking-tight">Campaigns</h2>
-                    <p className="text-sm text-gray-500">Manage and track your Meta Advertising campaigns.</p>
+                    <p className="text-sm text-muted-foreground">Manage and track your Meta Advertising campaigns.</p>
                 </div>
                 <button
                     onClick={handleSync}
                     disabled={syncing}
-                    className="bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 disabled:opacity-50"
+                    className="bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 disabled:opacity-50"
                 >
                     {syncing ? <RefreshCw className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
                     {syncing ? "Syncing..." : "Sync Now"}
@@ -82,8 +82,8 @@ export default function CampaignsPage() {
                         key={s}
                         onClick={() => setFilter(s)}
                         className={`px-4 py-2 text-sm font-medium transition-colors border-b-2 -mb-[2px] ${filter === s
-                            ? "border-slate-900 text-slate-900"
-                            : "border-transparent text-gray-500 hover:text-gray-700"
+                            ? "border-primary text-primary"
+                            : "border-transparent text-muted-foreground hover:text-foreground"
                             }`}
                     >
                         {s.charAt(0) + s.slice(1).toLowerCase()}
@@ -108,28 +108,28 @@ export default function CampaignsPage() {
                     </div>
                 </div>
             ) : (
-                <div className="bg-white border rounded-xl overflow-hidden shadow-sm">
+                <div className="bg-card border rounded-xl overflow-hidden shadow-sm">
                     <table className="w-full text-left text-sm">
-                        <thead className="bg-gray-50 border-b">
+                        <thead className="bg-muted/50 border-b">
                             <tr>
-                                <th className="px-6 py-3 font-medium text-gray-600">Campaign Name</th>
-                                <th className="px-6 py-3 font-medium text-gray-600">ID</th>
-                                <th className="px-6 py-3 font-medium text-gray-600">Status</th>
-                                <th className="px-6 py-3 font-medium text-gray-600">Synced At</th>
+                                <th className="px-6 py-3 font-medium text-muted-foreground">Campaign Name</th>
+                                <th className="px-6 py-3 font-medium text-muted-foreground">ID</th>
+                                <th className="px-6 py-3 font-medium text-muted-foreground">Status</th>
+                                <th className="px-6 py-3 font-medium text-muted-foreground">Synced At</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y">
                             {filteredCampaigns.map((camp) => (
-                                <tr key={camp.id} className="hover:bg-gray-50 transition-colors">
-                                    <td className="px-6 py-4 font-medium text-gray-900">{camp.name}</td>
-                                    <td className="px-6 py-4 text-gray-500 font-mono text-xs">{camp.id}</td>
+                                <tr key={camp.id} className="hover:bg-muted/50 transition-colors">
+                                    <td className="px-6 py-4 font-medium text-foreground">{camp.name}</td>
+                                    <td className="px-6 py-4 text-muted-foreground font-mono text-xs">{camp.id}</td>
                                     <td className="px-6 py-4">
-                                        <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${camp.status === 'ACTIVE' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'
+                                        <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${camp.status === 'ACTIVE' ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'
                                             }`}>
                                             {camp.status}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-4 text-gray-500">
+                                    <td className="px-6 py-4 text-muted-foreground">
                                         {new Date(camp.createdAt).toLocaleDateString()}
                                     </td>
                                 </tr>
